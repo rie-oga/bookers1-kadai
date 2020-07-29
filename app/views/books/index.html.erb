@@ -1,5 +1,6 @@
 <div class="box1">
 <h1>Books</h1>
+<%= h(flash[:notice]) %>
 <table>
 <tr>
 <th>Title</th>
@@ -22,15 +23,19 @@
 <!-- new index部分 -->
 <h2>New book</h2>
 <!-- form_for部分 -->
-<%= form_for(@book, url: '/books') do |f| %>
-<!-- errorメッセージ -->
 <div class="error">
 <% if @book.errors.any? %>
-   <p><strong>error<br>
-   can't be blank</strong></p>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 </div>
-<!-- errorメッセージここまで -->
+
+<%= form_for(@book, url: '/books') do |f| %>
   <h4>Title</h4>
   <%= f.text_field :title %>
   <h4>Body</h4>

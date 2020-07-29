@@ -9,15 +9,18 @@
 
 <h1>Editing Book</h1>
 <!-- form_for部分 -->
-<%= form_for(@book, url: book_path(@book.id)) do |f| %>
-<!-- errorメッセージ -->
 <div class="error">
 <% if @book.errors.any? %>
-   <p><strong>error<br>
-   can't be blank</strong></p>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 </div>
-<!-- errorメッセージここまで -->
+<%= form_for(@book, url: book_path(@book.id)) do |f| %>
   <h4>Title</h4>
   <%= f.text_field :title %>
   <h4>Body</h4>
